@@ -18,12 +18,18 @@ import type { Game, Ranking } from "@/models.ts"
 const games = ref<Game[]>([]);
 const rankings = ref<Ranking[]>([]);
 
-const fetchGameData = async (): Promise<void> => {
+const fetchGames = async (): Promise<void> => {
     const response = await fetch('https://rq-pingpong.pages.dev/api/games?limit=5');
     games.value = await response.json();
 };
 
+const fetchRankigns = async (): Promise<void> => {
+    const response = await fetch('/elo');
+    rankings.value = await response.json();
+};
+
 onMounted(() => {
-    fetchGameData();
+    fetchGames();
+    fetchRankigns();
 });
 </script>

@@ -31,3 +31,10 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### Run Vite (client side code) + CF functions (server side) together locally
+
+Two terminals, in first one, do: `npx vite build --watch` which will watch code changes and post them in the dist folder
+Second terminal, do: `npx wrangler pages dev dist` which will start the cloudflare functions, but since its pointed to dist it will also run the client side code.
+
+Drawback: there is no more automatic reloading on the website itself and its slower
