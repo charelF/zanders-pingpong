@@ -9,7 +9,7 @@
     "preview": "npm run build && wrangler pages dev ./dist",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
-    "deploy": "npm run build && wrangler pages deploy ./dist"
+    "deploy": "NOOO npm run build && wrangler pages deploy ./dist"
   },
   "dependencies": {
     "vue": "^3.4.29"
