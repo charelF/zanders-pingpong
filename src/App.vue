@@ -1,5 +1,9 @@
 <template>
-    <GameTable :games="games" />
+    <div class="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+    <div class="w-full md:w-2/3 lg:w-1/3 bg-white overflow-hidden">
+      <GameTable :games="games" />
+    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>

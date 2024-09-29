@@ -1,14 +1,14 @@
 <template>
-    <div>
-        <table id="gameTable" class="table-auto font-mono bg-zg1/20 text-zg2">
+    <div class="font-mono bg-zg1/20 text-zg2 pb-2">
+        <table id="gameTable" class="table-auto w-full">
             <thead class="bg-zg1">
                 <tr>
-                    <th class="pr-2 text-right">Winner</th>
-                    <th class="pr-5">Loser</th>
-                    <th>Time</th>
+                    <th class="p-2 pr-2 text-right">Winner</th>
+                    <th class="p-2 pr-5">Loser</th>
+                    <th class="p-2">Time</th>
                 </tr>
             </thead>
-            <tbody class="">
+            <tbody>
                 <tr v-for="game in games" :key="game.dt">
                     <td class="pr-2 text-right font-bold">{{ game.winner }}</td>
                     <td class="pr-5">{{ game.loser }}</td>
