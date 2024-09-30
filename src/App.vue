@@ -1,6 +1,6 @@
 <template>
-    <div class="flex items-center justify-center p-4">
-        <div class="w-full md:w-2/3 lg:w-2/4 overflow-x-auto space-y-4">
+    <div class="flex items-center justify-center">
+        <div class="w-full md:w-2/3 lg:w-2/4 overflow-x-auto space-y-6">
             <Leaderboard :rankings="rankings" />
             <GameTable :games="games" />
         </div>
