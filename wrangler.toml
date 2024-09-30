@@ -1,0 +1,6 @@
+# If you are only using Pages + D1, you only need the below in your wrangler.toml to interact with D1 locally.
+[[d1_databases]]
+binding = "DB" # Should match preview_database_id
+database_name = "zpp-d1"
+database_id = "9844988f-7ba3-4b17-b864-0ac2ef82e5fd"
+preview_database_id = "DB" # Required for Pages local development

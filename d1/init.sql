@@ -1,0 +1,15 @@
+DROP TABLE IF EXISTS games;  -- this one first due to foreign key constraints
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username VARCHAR(20) NOT NULL
+);
+CREATE TABLE IF NOT EXISTS games (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    winner INTEGER NOT NULL,
+    loser INTEGER NOT NULL,
+    dt datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    FOREIGN KEY (winner) REFERENCES users(id),
+    FOREIGN KEY (loser) REFERENCES users(id)
+);
