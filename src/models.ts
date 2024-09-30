@@ -1,7 +1,10 @@
 export interface Game {
-    winner: string;
-    loser: string;
+    id: number;
     dt: string;
+    winner_id: number;
+    winner: string;
+    loser_id: number;
+    loser: string;
 }
 
 export interface Ranking {
