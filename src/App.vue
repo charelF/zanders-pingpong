@@ -13,7 +13,8 @@
 import { ref, onMounted } from 'vue';
 import GameTable from './components/GameTable.vue';
 import Leaderboard from './components/Leaderboard.vue';
-import type { Game, Ranking } from "@/models.ts"
+import type { Game, Ranking } from "@/models"
+import { getQuarter } from "@/utils"
 
 const games = ref<Game[]>([]);
 const rankings = ref<Ranking[]>([]);
@@ -38,16 +39,23 @@ function computeElo(games: Game[]): Ranking[] {
         return playerStats[username];
     };
 
-    // Get the current month in YYYY-MM format
-    const currentDate = new Date();
-    const currentMonth = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}`;
 
-    // Filter the games to include only those from the current month
-    const currentMonthGames = games.filter((game) => game.dt.startsWith(currentMonth));
+    // Get the current quarter
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentQuarter = getQuarter(currentDate);
+
+    // Filter the games to include only those from the current quarter
+    const currentQuarterGames = games.filter((game) => {
+        const gameDate = new Date(game.dt);
+        const gameYear = gameDate.getFullYear();
+        const gameQuarter = getQuarter(gameDate);
+        return gameYear === currentYear && gameQuarter === currentQuarter;
+    });
 
 
     // Iterate over each game to update Elo ratings
-    currentMonthGames.forEach((game) => {
+    currentQuarterGames.forEach((game) => {
         const winnerStats = getPlayerStats(game.winner);
         const loserStats = getPlayerStats(game.loser);
 
@@ -65,7 +73,8 @@ function computeElo(games: Game[]): Ranking[] {
         const stats = playerStats[username];
         return {
             username,
-            score: Math.round(stats.score),  // Round the score for readability
+            score: Math.round(stats.score),
+            total: stats.total
         };
     });
 
