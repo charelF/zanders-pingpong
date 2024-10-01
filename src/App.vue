@@ -39,6 +39,7 @@ onMounted(() => {
 // Refresh the games list when a new game is submitted
 const refreshGames = () => {
     fetchGames();  // Call the API again to get the updated list of games
+    fetchRankigns();
 };
 
 </script>
