@@ -43,3 +43,7 @@ Drawback: there is no more automatic reloading on the website itself and its slo
 
 `npx wrangler pages dev dist --d1=DB`
 
+# Resetting the database:
+
+LOCAL: npx wrangler d1 execute zpp-d1 --local --file=./d1/init.sql DANGER
+REMOTE: npx wrangler d1 execute zpp-d1 --remote --file=./d1/init.sql DANGER
