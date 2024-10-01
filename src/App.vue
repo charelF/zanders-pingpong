@@ -3,6 +3,7 @@
         <div class="w-full md:w-2/3 lg:w-2/4 overflow-x-auto space-y-6">
             <Leaderboard :rankings="rankings" />
             <GameTable :games="games" />
+            <NewGame />
         </div>
     </div>
 
@@ -13,8 +14,8 @@
 import { ref, onMounted } from 'vue';
 import GameTable from './components/GameTable.vue';
 import Leaderboard from './components/Leaderboard.vue';
+import NewGame from './components/NewGame.vue';
 import type { Game, Ranking } from "@/models"
-
 
 const games = ref<Game[]>([]);
 const rankings = ref<Ranking[]>([]);

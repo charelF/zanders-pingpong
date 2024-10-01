@@ -13,3 +13,8 @@ export interface Ranking {
     total: number;
 }
 
+export interface User {
+    username: string;
+    id: number;
+}
+
