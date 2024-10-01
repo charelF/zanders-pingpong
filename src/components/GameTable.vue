@@ -20,7 +20,7 @@
                         <td class="px-2 py-1">{{ game.loser }}</td>
                         <td class="px-2 py-1">{{ formatDate(game.dt) }}</td>
                         <td class="px-2 py-1">
-                            <button @click="deleteGame(game.id)" class="underline">Delete</button>
+                            <button @click="deleteGame(game)" class="underline">Delete</button>
                         </td>
                     </tr>
                 </tbody>
@@ -46,8 +46,12 @@ const formatDate = (dateString: string): string => {
 };
 
 // Delete game function
-const deleteGame = async (gameId: number) => {
-    const response = await fetch(`/api/games?id=${gameId}`, {method: 'DELETE',});
+const deleteGame = async (game: Game) => {
+    const confirm = window.confirm(`Do you want to delete this game? ${game.winner} vs ${game.loser} at ${game.dt}`)
+    if (!confirm) {
+        return
+    }
+    const response = await fetch(`/api/games?id=${game.id}`, {method: 'DELETE',});
     try {
         if (response.ok) {
             emit('gameDeleted');
