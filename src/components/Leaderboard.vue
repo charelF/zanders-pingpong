@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 class="bg-zg2 text-zg1 p-2 text-xl font-bold text-center">{{ formatDate(new Date().toString()) }} Rankings
+        <h2 class="bg-zg2 text-zg1 p-2 text-xl font-bold text-center font-sans">🏆 {{ formatDate(new Date().toString()) }} Leaderboard
         </h2>
 
         <div class="bg-zg1/20 text-zg2 pb-1">

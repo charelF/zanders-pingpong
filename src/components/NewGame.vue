@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 class="bg-zg2 text-zg1 p-2 text-xl font-bold text-center">Record new Game</h2>
+        <h2 class="bg-zg2 text-zg1 p-2 text-xl font-bold text-center font-sans">🏓 Record a new game</h2>
 
         <form @submit.prevent="submitForm">
             <div class="flex flex-row">

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 class="bg-zg2 text-zg1 p-2 text-xl font-bold text-center">Recent Games</h2>
+        <h2 class="bg-zg2 text-zg1 p-2 text-xl font-bold text-center font-sans">⏳ Recent games</h2>
 
         <div class="bg-zg1/20 text-zg2 pb-1">
             <table id="gameTable" class="table-auto w-full">
@@ -10,7 +10,7 @@
                         <th class="p-2 text-left"></th>
                         <th class="p-2 text-left">Loser</th>
                         <th class="p-2 text-left">Date</th>
-                        <th class="p-2 text-left">Delete?</th>
+                        <th class="p-2 text-left">Action</th>
                     </tr>
                 </thead>
                 <tbody>

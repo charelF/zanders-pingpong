@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 class="bg-zg2 text-zg1 p-2 text-xl font-bold text-center">Add new User</h2>
+        <h2 class="bg-zg2 text-zg1 p-2 text-xl font-bold text-center font-sans">👶 Add new user</h2>
 
         <form @submit.prevent="submitForm">
             <div class="flex flex-row">
