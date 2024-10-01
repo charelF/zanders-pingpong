@@ -36,13 +36,13 @@ const submitForm = async () => {
     try {
         const response = await fetch(`/api/users/${user.value}`, { method: 'POST' })
         if (!response.ok) {
-            alert("Failed to create user");
+            alert("Failed to create user. Most likely it already exists ☝️🤓");
         }
         emit('userSubmitted');
         user.value = ""
     } catch (error) {
         console.error(error);
-        alert("There was an error submitting the form.");
+        alert(`There was an error submitting the form: ${error}`);
     }
 };
 </script>
