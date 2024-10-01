@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 class="bg-zg2 text-zg1 p-2 text-xl font-bold text-center">Record new game</h2>
+        <h2 class="bg-zg2 text-zg1 p-2 text-xl font-bold text-center">Record new Game</h2>
 
         <form @submit.prevent="submitForm">
             <div class="flex flex-row">
@@ -33,18 +33,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, defineEmits } from 'vue'
-import type { User } from "@/models"
+import type { User } from '@/models';
+import { ref, defineEmits } from 'vue'
 
-const users = ref<User[]>([]);
 const winner = ref<string>('');
 const loser = ref<string>('');
 
 // Fetch users from API
-const fetchUsers = async (): Promise<void> => {
-    const response = await fetch('api/users');
-    users.value = await response.json();
-};
+
 
 // Emit an event when the game is successfully submitted
 const emit = defineEmits(['gameSubmitted']);
@@ -63,8 +59,8 @@ const submitForm = async () => {
         return;
     }
 
-    const winner_id = users.value.find(u => u.username === winner.value)?.id;
-    const loser_id = users.value.find(u => u.username === loser.value)?.id;
+    const winner_id = props.users.find(u => u.username === winner.value)?.id;
+    const loser_id = props.users.find(u => u.username === loser.value)?.id;
 
     if (!winner_id) {
         alert("Enter a valid winner 🫣");
@@ -89,6 +85,8 @@ const submitForm = async () => {
         }
 
         emit('gameSubmitted');
+        winner.value = ""
+        loser.value = ""
 
     } catch (error) {
         console.error(error);
@@ -97,9 +95,8 @@ const submitForm = async () => {
 
 };
 
-// Fetch users when the component is mounted
-onMounted(() => {
-    fetchUsers();
-});
+const props = defineProps<{
+    users: User[]
+}>();
 
 </script>

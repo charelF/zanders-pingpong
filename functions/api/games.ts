@@ -29,3 +29,19 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         return new Response(JSON.stringify({ error: error.message }), { status: 400 });
     }
 };
+
+export const onRequestDelete: PagesFunction<Env> = async (context) => {
+    try {
+        const { searchParams } = new URL(context.request.url);
+        const gameId = parseInt(searchParams.get('id') ?? '', 10);
+        if (isNaN(gameId)) {
+            return new Response("Invalid game ID", { status: 400 });
+        }
+        const ps = context.env.DB.prepare("DELETE FROM games WHERE id = ?1").bind(gameId);
+        const { success } = await ps.run();
+        return Response.json(success)
+    } catch (error) {
+        return new Response(JSON.stringify({ error: error.message }), { status: 400 });
+    }
+};
+

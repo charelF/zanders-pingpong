@@ -3,7 +3,7 @@ interface Env {
 }
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
-    const id = context.params.id
+    const id = decodeURIComponent(context.params.id)
     const ps = context.env.DB.prepare("INSERT INTO users (username) VALUES (?)").bind(id)
     const { success } = await ps.run()
     return Response.json(success);

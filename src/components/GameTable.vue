@@ -2,23 +2,26 @@
     <div>
         <h2 class="bg-zg2 text-zg1 p-2 text-xl font-bold text-center">Recent Games</h2>
 
-        <div class="bg-zg1/20 text-zg2 pb-2">
+        <div class="bg-zg1/20 text-zg2 pb-1">
             <table id="gameTable" class="table-auto w-full">
                 <thead class="bg-zg1">
                     <tr>
-                        <th class="py-2 pl-2 pr-2 text-right">Winner</th>
-                        <th></th>
-                        <th class="pr-5 pr-5 text-left">Loser</th>
-                        <th class="pr-2 text-left">Date</th>
+                        <th class="p-2 text-right">Winner</th>
+                        <th class="p-2 text-left"></th>
+                        <th class="p-2 text-left">Loser</th>
+                        <th class="p-2 text-left">Date</th>
+                        <th class="p-2 text-left">Delete?</th>
                     </tr>
                 </thead>
-                <p class="pt-1"></p>
                 <tbody>
                     <tr v-for="game in games" :key="game.dt">
-                        <td class="pl-2 pr-2 text-right font-bold">{{ game.winner }}</td>
-                        <td>-</td>
-                        <td class="pr-5">{{ game.loser }}</td>
-                        <td class="pr-2">{{ formatDate(game.dt) }}</td>
+                        <td class="px-2 py-1 text-right font-bold">{{ game.winner }}</td>
+                        <td class="px-2 py-1 text-center">-</td>
+                        <td class="px-2 py-1">{{ game.loser }}</td>
+                        <td class="px-2 py-1">{{ formatDate(game.dt) }}</td>
+                        <td class="px-2 py-1">
+                            <button @click="deleteGame(game.id)" class="underline">Delete</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -28,6 +31,9 @@
 
 <script lang="ts" setup>
 import type { Game } from "@/models.ts"
+import { defineEmits } from 'vue'
+
+const emit = defineEmits(['gameDeleted']);
 
 const formatDate = (dateString: string): string => {
     return new Date(dateString).toLocaleString('nl-NL', {
@@ -37,6 +43,21 @@ const formatDate = (dateString: string): string => {
         hour: 'numeric',
         minute: '2-digit'
     });
+};
+
+// Delete game function
+const deleteGame = async (gameId: number) => {
+    const response = await fetch(`/api/games?id=${gameId}`, {method: 'DELETE',});
+    try {
+        if (response.ok) {
+            emit('gameDeleted');
+        } else {
+            alert('Failed to delete game');
+        }
+    } catch (error) {
+        console.error('Error deleting game:', error);
+        alert('Error deleting game');
+    }
 };
 
 defineProps<{
