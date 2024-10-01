@@ -2,7 +2,7 @@
     <div>
         <h2 class="bg-zg2 text-zg1 p-2 text-xl font-bold text-center">Recent Games</h2>
 
-        <div class="font-mono bg-zg1/20 text-zg2 pb-2">
+        <div class="bg-zg1/20 text-zg2 pb-2">
             <table id="gameTable" class="table-auto w-full">
                 <thead class="bg-zg1">
                     <tr>

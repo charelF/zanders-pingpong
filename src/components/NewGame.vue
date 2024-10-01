@@ -3,22 +3,29 @@
         <h2 class="bg-zg2 text-zg1 p-2 text-xl font-bold text-center">Record new game</h2>
 
         <form @submit.prevent="submitForm">
+            <div class="flex flex-row">
+                <div class="bg-zg1/20 basis-3/4">
+                    <div class="p-2 flex flex-row">
+                        <label for="winner" class="basis-1/3 text-right pr-2"> Winner: </label>
+                        <input type="text" v-model="winner" list="users" id="winner" class="w-full basis-2/3 pr-2">
+                        <datalist id="users">
+                            <option v-for="user in users" :key="user.id" :value="user.username"></option>
+                        </datalist>
+                    </div>
 
-            <div>
-                <input type="text" v-model="winner" list="users">
-                <datalist id="users">
-                    <option v-for="user in users" :key="user.id" :value="user.username"></option>
-                </datalist>
-            </div>
+                    <div class="p-2 flex flex-row">
+                        <label for="loser" class="basis-1/3 text-right pr-2"> Loser: </label>
+                        <input type="text" v-model="loser" list="users" id="loser" class="w-full basis-2/3 pr-2">
+                        <datalist id="users">
+                            <option v-for="user in users" :key="user.id" :value="user.username"></option>
+                        </datalist>
+                    </div>
+                </div>
 
-            <div>
-                <input type="text" v-model="loser" list="users">
-                <datalist id="users">
-                    <option v-for="user in users" :key="user.id" :value="user.username"></option>
-                </datalist>
+                <button type="submit" class="bg-zg1 basis-1/4 font-bold active:bg-zg1/80">Submit</button>
             </div>
-            <button type="submit" class="bg-blue-500 text-white p-2 mt-4 rounded">Submit</button>
         </form>
+
 
 
     </div>
