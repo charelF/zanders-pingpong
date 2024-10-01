@@ -3,7 +3,7 @@
         <div class="w-full md:w-2/3 lg:w-2/4 overflow-x-auto space-y-6">
             <Leaderboard :rankings="rankings" />
             <GameTable :games="games" />
-            <NewGame />
+            <NewGame @gameSubmitted="refreshGames" />
         </div>
     </div>
 
@@ -30,8 +30,15 @@ const fetchRankigns = async (): Promise<void> => {
     rankings.value = await response.json()
 };
 
+// Fetch the games when the parent component is mounted
 onMounted(() => {
     fetchGames();
     fetchRankigns();
 });
+
+// Refresh the games list when a new game is submitted
+const refreshGames = () => {
+    fetchGames();  // Call the API again to get the updated list of games
+};
+
 </script>
