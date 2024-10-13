@@ -1,12 +1,16 @@
 <template>
-    <div class="flex items-center justify-center font-mono">
+    <!-- <div class="flex items-center justify-center font-mono">
         <div class="w-full md:w-2/3 lg:w-2/4 overflow-x-auto space-y-6">
             <NewGame @gameSubmitted="refreshGames" :users="users" />
             <Leaderboard :rankings="rankings" />
             <GameTable @gameDeleted="refreshGames":games="games" />
             <NewUser @userSubmitted="refreshUsers" :users="users" />
         </div>
-    </div>
+    </div> -->
+
+    <GridView></GridView>
+
+    
 
 
 </template>
@@ -18,6 +22,7 @@ import Leaderboard from './components/Leaderboard.vue';
 import NewGame from './components/NewGame.vue';
 import type { Game, Ranking, User } from "@/models"
 import NewUser from './components/NewUser.vue';
+import GridView from './components/GridView.vue';
 
 const games = ref<Game[]>([]);
 const rankings = ref<Ranking[]>([]);
