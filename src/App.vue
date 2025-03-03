@@ -3,13 +3,11 @@
         <div class="w-full md:w-2/3 lg:w-2/4 overflow-x-auto space-y-6">
             <NewGame @gameSubmitted="refreshGames" :users="users" />
             <Leaderboard :rankings="rankings" />
+            <LeaderboardTotal :rankingstotal="rankingstotal" />
             <GameTable @gameDeleted="refreshGames":games="games" />
             <NewUser @userSubmitted="refreshUsers" :users="users" />
         </div>
     </div>
-
-
-    
 
 
 </template>
@@ -18,12 +16,14 @@
 import { ref, onMounted } from 'vue';
 import GameTable from './components/GameTable.vue';
 import Leaderboard from './components/Leaderboard.vue';
+import LeaderboardTotal from './components/LeaderboardTotal.vue';
 import NewGame from './components/NewGame.vue';
 import type { Game, Ranking, User } from "@/models"
 import NewUser from './components/NewUser.vue';
 
 const games = ref<Game[]>([]);
 const rankings = ref<Ranking[]>([]);
+const rankingstotal = ref<Ranking[]>([]);
 const users = ref<User[]>([]);
 
 const fetchGames = async (): Promise<void> => {
@@ -36,6 +36,11 @@ const fetchRankigns = async (): Promise<void> => {
     rankings.value = await response.json()
 };
 
+const fetchRankignsTotal = async (): Promise<void> => {
+    const response = await fetch('/api/elototal');
+    rankingstotal.value = await response.json()
+};
+
 const fetchUsers = async (): Promise<void> => {
     const response = await fetch('api/users');
     users.value = await response.json();
@@ -46,6 +51,7 @@ onMounted(() => {
     fetchGames();
     fetchRankigns();
     fetchUsers();
+    fetchRankignsTotal();
 });
 
 // Refresh the games list when a new game is submitted
@@ -53,12 +59,14 @@ const refreshGames = () => {
     fetchGames();
     fetchRankigns();
     fetchUsers();
+    fetchRankignsTotal();
 };
 
 const refreshUsers = () => {
     fetchGames();
     fetchRankigns();
     fetchUsers();
+    fetchRankignsTotal();
 };
 
 </script>
