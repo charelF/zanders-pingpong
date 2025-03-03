@@ -65,7 +65,7 @@ function computeElo(games: Game[]): Ranking[] {
 
 export const onRequest: PagesFunction<Env> = async (context) => {
     const { searchParams } = new URL(context.request.url);
-    const amount = parseInt(searchParams.get('limit') ?? '20', 10);
+    const amount = parseInt(searchParams.get('limit') ?? '10000', 10);
 
     const ps = context.env.DB.prepare(`
         SELECT 
