@@ -50,7 +50,7 @@ function computeElo(games: Game[]): Ranking[] {
         return {
             username,
             score: Math.round(stats.score),
-            total: stats.total
+            total: -1 // hehe otherwise liam hates me
         };
     });
 
