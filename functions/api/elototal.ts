@@ -45,14 +45,21 @@ function computeElo(games: Game[]): Ranking[] {
     });
 
     // Convert playerStats map into a list of rankings
-    const rankings: Ranking[] = Object.keys(playerStats).map((username) => {
+    const rankings: Ranking[] = Object.keys(playerStats)
+    .map((username) => {
         const stats = playerStats[username];
         return {
             username,
             score: Math.round(stats.score),
-            total: -1 // hehe otherwise liam hates me
+            total: stats.total
         };
-    });
+    })
+    .filter((player) => player.total >= 10) // Keep only players with at least 10 games
+    .map((player) => ({
+        ...player,
+        total: 10 // Set total to 10 for display purposes
+    }));
+
 
     rankings.sort((a, b) => b.score - a.score);
     return rankings;
